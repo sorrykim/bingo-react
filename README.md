@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 과제: Redux 혹은 MobX를 이용한 빙고 구현
 
-## Available Scripts
 
-In the project directory, you can run:
+## 조건
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React를 사용할 것
+- Redux 혹은 MobX를 사용할 것
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+## 목적
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+- Redux, MobX, React 같은 framework, library를 사용하는 이유, 설계 의의를 이해하고 그에 맞게 코드를 작성할 수 있는가
+- application state를 Redux 혹은 MobX에 맞게 설계할 수 있는가
+- React component를 적절히 나눌 수 있는가
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+다음은 이 과제의 목적이 아닙니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+- 스타일 작업
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 구현 상세
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+화면에는 다음과 같은 내용이 표시됩니다.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 게임 (재)시작 버튼
+- 1P, 2P 각각의 5x5 빙고판과 완성 줄 표시 목록
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### 게임의 시작
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
+1. 처음에 빙고판의 내용은 비어있으며, cell을 눌러도 반응하지 않습니다.
+2. '게임 시작'을 누르면 빙고판마다 1에서 25까지의 숫자가 임의로 배치됩니다.
+3. '게임 시작' 버튼은 '게임 재시작'으로 텍스트가 바뀝니다.
+4. 이후 '게임 재시작' 버튼을 누르면 완성 줄 목록이 초기화되며, 빙고판은 2의 상태로 돌아갑니다. (숫자는 새롭게 채워짐)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
+### 게임의 진행
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. 게임이 시작되면 1P부터 번갈아가며 cell을 클릭할 수 있습니다. (자기 차례가 아닌데 cell을 클릭할 경우 '잘못된 차레입니다.' 알림이 뜹니다.)
+2. cell을 클릭하면 모든 빙고판에서 해당하는 숫자에 특정한 표시를 합니다.
+3. 빙고판에서 가로, 세로, 대각선으로 다섯개의 cell이 연달아 표시된 경우, 완성 줄 목록에 완성된 순서로 표기합니다.
+4. 5줄을 완성한 플레이어가 생기면, 결과에 따라 '1/2P가 빙고를 완성했습니다.', '무승부입니다.' 알림이 뜹니다. 확인을 누르면 UI가 완전히 초기화됩니다.
