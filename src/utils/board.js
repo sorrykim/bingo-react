@@ -4,8 +4,8 @@ import faker from 'faker';
 import { Cell } from '../models/cell';
 import Bingo, { ROW, COLUMN, DOWNWARD_DIAGONAL, UPWARD_DIAGONAL } from '../models/bingo';
 
-const BOARD_SIZE = 5;
-const BOARD_AREA = BOARD_SIZE * BOARD_SIZE;
+export const BOARD_SIZE = 5;
+export const BOARD_AREA = BOARD_SIZE * BOARD_SIZE;
 
 export function createBoard() {
   return faker.helpers.shuffle(range(BOARD_AREA)).map(
@@ -17,13 +17,13 @@ export function createBoard() {
 }
 
 function coordinateToIndex(row, column) {
-  if (row >= BOARD_SIZE) throw 'Row is too big';
-  if (column >= BOARD_SIZE) throw 'Column is too large';
+  if (row >= BOARD_SIZE) throw new Error('Row is too big');
+  if (column >= BOARD_SIZE) throw new Error('Column is too large');
   return row * BOARD_SIZE + column;
 }
 
 function indexToCoordinate(index) {
-  if (index >= BOARD_AREA) throw 'Index is too big';
+  if (index >= BOARD_AREA) throw new Error('Index is too big');
   const row = Math.floor(index / BOARD_SIZE);
   const column = index % BOARD_SIZE;
   return {row, column};
@@ -45,13 +45,13 @@ function getColumnCells(board, {column}) {
   return range(BOARD_SIZE).map(row => getCell(board, row, column));
 }
 
-function getDownwardDiagonalCells(board, {row, column}) {
-  if (row !== column) throw 'No upward diagonal cells';
+function getDownwardDiagonalCells(board, cell) {
+  if (!cell.isDownwardDiagonal()) throw new Error('No upward diagonal cells');
   return range(BOARD_SIZE).map(row => getCell(board, row, row));
 }
 
-function getUpwardDiagonalCells(board, {row, column}) {
-  if (row + column === BOARD_SIZE - 1) throw 'No downward diagonal cells';
+function getUpwardDiagonalCells(board, cell) {
+  if (!cell.isUpwardDiagonal()) throw new Error('No upward diagonal cells');
   return range(BOARD_SIZE).map(row => getCell(board, row, BOARD_SIZE - 1 - row));
 }
 

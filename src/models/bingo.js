@@ -41,5 +41,5 @@ export default class Bingo {
 }
 
 export function sortBingos(bingos) {
-  return bingos.sort(Bingo.compare);
+  return bingos.slice().sort(Bingo.compare);
 }

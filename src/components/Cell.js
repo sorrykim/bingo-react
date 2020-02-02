@@ -1,9 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 
-export default function Cell({ number, isMarked = false, onClick = () => {}, isActive }) {
+export default function Cell({ number, isMarked = false, onClick = () => {}, isTurn }) {
   function handleClick(number) {
-    if (isActive && !isMarked) {
+    if (isTurn && !isMarked) {
       onClick(number);
     }
   }
@@ -16,7 +16,7 @@ export default function Cell({ number, isMarked = false, onClick = () => {}, isA
         border: 1px solid;
         background-color: ${isMarked ? 'grey' : 'none'};
         text-align: center;
-        cursor: ${isActive ? 'pointer' : 'not-allowed'};
+        cursor: ${isTurn ? 'pointer' : 'not-allowed'};
       `}
       onClick={() => handleClick(number)}
     >

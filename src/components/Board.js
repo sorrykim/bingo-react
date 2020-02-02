@@ -1,23 +1,13 @@
 import React from 'react';
 import { css } from 'emotion'
 import classNames from 'classnames';
-import { useDispatch } from 'react-redux';
 
 import Cell from './Cell';
-import { markCell } from '../ducks/board';
-import { switchTurn } from '../ducks/game';
-import { useSelector } from 'react-redux/lib/hooks/useSelector';
 
-export default function Board({ className, bingos, cells, isActive }) {
-  const dispatch = useDispatch();
-  const isBoard1BingoMade = useSelector(isBoard1BingoMade)
-
+export default function Board({ className, bingos, cells, isTurn, onCellClick }) {
   function handleCellClick(number) {
-    if (isActive) {
-      dispatch(markCell(number));
-      // check and record bingo
-
-      dispatch(switchTurn());
+    if (isTurn) {
+      onCellClick(number);
     }
   }
 
@@ -40,7 +30,7 @@ export default function Board({ className, bingos, cells, isActive }) {
             number={number}
             isMarked={isMarked}
             onClick={handleCellClick}
-            isActive={isActive}
+            isTurn={isTurn}
           />
         ))}
       </div>

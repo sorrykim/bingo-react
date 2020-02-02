@@ -1,4 +1,5 @@
 import { immerable } from 'immer';
+import { BOARD_SIZE } from '../utils/board';
 
 export class Cell {
   constructor(number, row, column, isMarked = false) {
@@ -18,6 +19,6 @@ export class Cell {
   }
 
   isUpwardDiagonal() {
-    return this.row === this.column
+    return this.row + this.column === BOARD_SIZE - 1;
   }
 }
