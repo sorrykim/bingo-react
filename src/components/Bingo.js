@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Board from './Board';
 import {
-  startGame, isPlayer1ActiveSelector, isPlayer2ActiveSelector, isStartedSelector
+  playGame, isPlayer1ActiveSelector, isPlayer2ActiveSelector, isStartedSelector
 } from '../ducks/game';
 import { board1Selector, board2Selector, resetBoard } from '../ducks/board';
 import { sortedBingos1Selector, sortedBingos2Selector, resetBingos } from '../ducks/bingos';
@@ -25,7 +25,7 @@ export default function Bingo() {
       dispatch(resetBoard());
       dispatch(resetBingos());
     }
-    dispatch(startGame())
+    dispatch(playGame())
   }
 
   return (

@@ -2,7 +2,7 @@ import range from 'lodash/range';
 import faker from 'faker';
 
 import { Cell } from '../models/cell';
-import { Bingo, ROW, COLUMN, DOWNWARD_DIAGONAL, UPWARD_DIAGONAL } from '../models/bingo';
+import Bingo, { ROW, COLUMN, DOWNWARD_DIAGONAL, UPWARD_DIAGONAL } from '../models/bingo';
 
 const BOARD_SIZE = 5;
 const BOARD_AREA = BOARD_SIZE * BOARD_SIZE;

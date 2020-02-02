@@ -1,48 +1,25 @@
-const START = 'bingo/game/START';
-const SWITCH = 'bingo/game/SWITCH';
+// statuses
+const READY = 0;
+const PLAYING = 1;
+const ENDED = 2;
+
+// action types
+const PLAY = 'bingo/game/PLAY';
 const END = 'bingo/game/END';
+const RESET = 'bingo/game/RESET';
 
-export function isPlayer1ActiveSelector(state) {
-  return state.game.player1;
-}
+const INITIAL_STATE = {status: READY};
 
-export function isPlayer2ActiveSelector(state) {
-  return state.game.player2;
-}
-
-export function isStartedSelector(state) {
-  return state.game.isStarted;
-}
-
-export default function reducer(state = {
-  isStarted: false,
-  player1: false,
-  player2: false,
-  winner: undefined,
-}, action) {
+export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case START: {
-      return {
-        isStarted: true,
-        player1: true,
-        player2: false,
-        winner: undefined,
-      };
-    }
-    case SWITCH: {
-      return {
-        ...state,
-        player1: !state.player1,
-        player2: !state.player2,
-      };
+    case PLAY: {
+      return { status: PLAYING }
     }
     case END: {
-      return {
-        ...state,
-        player1: false,
-        player2: false,
-        winner: action.winner,
-      }
+      return { status: ENDED };
+    }
+    case RESET: {
+      return INITIAL_STATE;
     }
     default: {
       return state;
@@ -50,14 +27,14 @@ export default function reducer(state = {
   }
 }
 
-export function startGame() {
-  return { type: START };
+export function playGame() {
+  return { type: PLAY };
 }
 
-export function endGame(winner) {
-  return { type: END, winner };
+export function endGame() {
+  return { type: END };
 }
 
-export function switchTurn() {
-  return { type: SWITCH };
+export function resetGame() {
+  return { type: RESET };
 }

@@ -3,7 +3,6 @@ import produce from 'immer';
 import {ofType, mergeMap} from 'redux-observable';
 
 import {createBoard, findCell, findNewBingos} from '../utils/board';
-import { createStore } from 'redux';
 import { addBingos, BINGOS_1 } from './bingos';
 
 
@@ -11,7 +10,7 @@ import { addBingos, BINGOS_1 } from './bingos';
 const MARK = 'bingo/board/MARK';
 const RESET = 'bingo/board/RESET';
 
-// action creator
+// selectors
 export function board1Selector(state) {
   return state.board.board1;
 }

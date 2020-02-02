@@ -3,7 +3,17 @@ export const COLUMN = 1;
 export const DOWNWARD_DIAGONAL = 2;
 export const UPWARD_DIAGONAL = 3;
 
-export class Bingo {
+export default class Bingo {
+  static compare(bingo1, bingo2) {
+    if (bingo1.direction < bingo2.direction) return -1;
+    if (bingo1.direction > bingo2.direction) return 1;
+    if (bingo1.direction === bingo2.direction) {
+      if (bingo1.number < bingo2.number) return -1;
+      if (bingo1.number > bingo2.number) return 1;
+    }
+    return 0;
+  }
+
   constructor(direction, number) {
     this.direction = direction;
     this.number = number;
@@ -28,14 +38,8 @@ export class Bingo {
       }
     }
   }
+}
 
-  compareTo(other) {
-    if (this.direction < other.direction) return -1;
-    if (this.direction > other.direction) return 1;
-    if (this.direction === other.direction) {
-      if (this.number < other.number) return -1;
-      if (this.number > other.number) return 1;
-    }
-    return 0;
-  }
+export function sortBingos(bingos) {
+  return bingos.sort(Bingo.compare);
 }
